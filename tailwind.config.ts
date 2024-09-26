@@ -45,6 +45,7 @@ const config: Config = {
         "trinitypad-mid-blue": "#004dea",
         "trinitypad-dark-blue": "#0020e4",
         "trinitypad-gray": "#C2C5D6",
+        "trinitypad-dark-grey": "#1C1E2C",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

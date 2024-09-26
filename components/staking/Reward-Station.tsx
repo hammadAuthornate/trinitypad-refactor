@@ -25,9 +25,10 @@ import { TileCard } from "@/components/ui/cards/tile-card";
 // import { SpinnerBtn } from "@/components/ui/spinner/spinner-btn";
 // import { useGetTotalLockedTNT } from "@/firebase/firestore/queries/investment-queries";
 // import { OutlineGradientBtn } from "@/components/ui/buttons/outline-btn";
-import { GradientBorderWrapper } from "@/components/ui/gradient-border-wrapper";
+// import { GradientBorderWrapper } from "@/components/ui/gradient-border-wrapper";
 // import { formatNumber } from "@/lib/format-number";
 // import * as RadioGroup from "@radix-ui/react-radio-group";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // const lockData = [
 //   {
@@ -53,7 +54,10 @@ function LockingBox() {
 
   //   const { data } = useGetTotalLockedTNT();
 
-  const [activeBtn, setActiveBtn] = useState(0);
+  const [
+    activeBtn,
+    // setActiveBtn
+  ] = useState(0);
   //   const [openDialog, setOpenDialog] = useState(false);
   //   const [actMaxMin, setActMaxMin] = useState(0);
   //   const [selectedWallet, setSelectedWallet] = useState<string | undefined>(
@@ -119,11 +123,23 @@ function LockingBox() {
   //   }
 
   return (
-    <div data-aos="flip-left">
-      <GradientBorderWrapper
+    <div data-aos="flip-left" className="gradient-border-box !border-4">
+      <div className="bg-trinitypad-dark-grey rounded-[20px] p-4">
+        {/* <GradientBorderWrapper
         wrapperClassName="max-w-3xl mx-auto"
         className="max-md:p-4 md:p-7"
-      >
+      > */}
+        <Tabs defaultValue="lock" className="w-full">
+          <TabsList className="w-full">
+            <TabsTrigger value="lock">Lock TNT</TabsTrigger>
+            <TabsTrigger value="unlock">Unlock TNT</TabsTrigger>
+          </TabsList>
+          <TabsContent value="lock">
+            Make changes to your account here.
+          </TabsContent>
+          <TabsContent value="unlock">Change your password here.</TabsContent>
+        </Tabs>
+
         <div className="flex flex-col items-center gap-5 md:flex-row">
           {activeBtn === 0 && (
             <>
@@ -252,7 +268,7 @@ function LockingBox() {
               </div>
             </div>
             <div className="mt-10 rounded-xl bg-btn-gradient-reverse p-0.5">
-              <div className="size-full rounded-xl bg-[#1C1E2C] p-7 max-md:p-2">
+              <div className="bg-trinitypad-dark-grey size-full rounded-xl p-7 max-md:p-2">
                 <div className="flex w-full flex-wrap items-center justify-between gap-5 rounded-[7px] border-[1px] border-[#868DAE33] bg-[#2B2D40] p-3">
                   <div className="flex items-center gap-4">
                     <Image
@@ -398,11 +414,12 @@ function LockingBox() {
           Unstake
           {/* </OutlineGradientBtn> */}
         </div>
-      </GradientBorderWrapper>
-      {/* ))}  */}
-      {/* </div> */}
-      {/* )} */}
-      {/* </GradientBorderWrapper>  */}
+        {/* </GradientBorderWrapper> */}
+        {/* ))}  */}
+        {/* </div> */}
+        {/* )} */}
+        {/* </GradientBorderWrapper>  */}
+      </div>
     </div>
   );
 }
