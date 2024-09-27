@@ -30,7 +30,7 @@
 // import Image from "next/image";
 // import generateRandomString from "@/lib/generateRandomString";
 // import { ref, uploadBytes } from "firebase/storage";
-// import { CHAIN_DETAILS, getChainDetailsByChainName } from "@/lib/constants";
+import { CHAIN_DETAILS, getChainDetailsByChainName } from "@/lib/ChainDetails";
 // import { Tooltip } from "@mui/material";
 // import { GradientBorderWrapper } from "../gradient-border-wrapper";
 

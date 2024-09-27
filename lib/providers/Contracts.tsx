@@ -16,9 +16,9 @@ import { trinityPad } from "@/abis/pad/trinity-pad";
 import { stakeABI } from "@/abis/stake/contract";
 
 import { TrinityERC20 } from "@/abis/token/trinity-erc20";
-import useCheckUserLocation from "@/helpers/checkUserLocation";
+import useCheckUserLocation from "@/lib/helpers/checkUserLocation";
 import { useQuery } from "@tanstack/react-query";
-import { ChainTypes, getChainDetailsByChainName } from "@/lib/constants";
+import { ChainTypes, getChainDetailsByChainName } from "@/lib/ChainDetails";
 
 interface ContractsContextType {
   myProvider: ethers.BrowserProvider | null;

@@ -22,7 +22,7 @@ import React from "react";
 // import { SpinnerBtn } from "../ui/spinner/spinner-btn";
 // import { useRouter } from "next/navigation";
 // import { useGetFirebaseFileById } from "@/firebase/firestore/images";
-// import { getChainDetailsByChainName } from "@/lib/constants";
+import { getChainDetailsByChainName } from "@/lib/ChainDetails";
 import { GradientBorderWrapper } from "../gradient-border-wrapper";
 import { AlertTriangle } from "lucide-react";
 // { card }: { card: Partial<CampaignDetails> }
