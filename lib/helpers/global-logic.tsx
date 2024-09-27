@@ -1,5 +1,5 @@
 import { NotifyProps } from "@/components/ui/toast/notify";
-import { SocialPoints } from "@/interface/types/profile-types";
+import { SocialPoints } from "@/interface/profile-types";
 
 export const totalPoints = (p: SocialPoints) => {
   return (

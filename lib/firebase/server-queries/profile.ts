@@ -1,13 +1,10 @@
 "use server";
 
-import { db } from "@/firebase/config";
-import {
-  LeaderBoardUserDetails,
-  UserDetails,
-} from "@/interface/types/profile-types";
+import { db } from "@/lib/firebase/config";
+import { LeaderBoardUserDetails, UserDetails } from "@/interface/profile-types";
 import { collection, getDocs, query } from "firebase/firestore";
 import { unstable_cache as cache } from "next/cache";
-import { PrivyClient } from "@privy-io/server-auth";
+// import { PrivyClient } from "@privy-io/server-auth";
 
 //#region PROFILE_FUNCTIONS
 export async function GetAllUserProfiles() {
