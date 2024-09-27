@@ -1,21 +1,18 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   addDoc,
-  arrayUnion,
   collection,
   deleteDoc,
   doc,
   getDocs,
-  increment,
-  orderBy,
   query,
   updateDoc,
   where,
 } from "firebase/firestore";
-import { db } from "@/firebase/config";
-import { StakeDetails } from "@/interface/types/stakes-types";
+import { db } from "@/lib/firebase/config";
+import { StakeDetails } from "@/interface/stakes-types";
 import MerkleTree from "merkletreejs";
-import { ContractStatesContext } from "@/context/contracts";
+import { ContractStatesContext } from "@/lib/providers/Contracts";
 import { usePrivy } from "@privy-io/react-auth";
 import { ethers } from "ethers";
 import { useNotify } from "@/components/ui/toast/notify";

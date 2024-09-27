@@ -7,8 +7,8 @@ import {
   getDocs,
   query,
 } from "firebase/firestore";
-import { db, storage } from "../../config";
-import { AirdropCarouselType } from "@/interface/types/airdrop-types";
+import { db, storage } from "@/lib/firebase/config";
+import { AirdropCarouselType } from "@/interface/airdrop-types";
 import generateRandomString from "@/lib/generateRandomString";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 

@@ -1,6 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { addAMail4NewsLetter } from "../newsletter";
 import { useNotify } from "@/components/ui/toast/notify";
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import dayjs from "dayjs";
+import { db } from "@/lib/firebase/config";
 
 export function useSubmitNewsletterEmail() {
   const notify = useNotify();
@@ -23,19 +25,32 @@ export function useSubmitNewsletterEmail() {
         throw new Error("Email is not valid");
       }
 
-      const isMailAdded = await addAMail4NewsLetter(email);
-      if (isMailAdded) {
-        notify({
-          title: "Email added successfully",
-          type: "success",
-        });
-      } else {
-        notify({
-          title: "Email already exists!",
-          type: "warning",
-        });
-        throw new Error("Email already exists");
+      const newsletterRef = collection(db, "newsletterEmails");
+      const emailQuery = query(newsletterRef, where("email", "==", email));
+      const querySnapshot = await getDocs(emailQuery);
+      if (!querySnapshot.empty) {
+        throw new Error("Email already exists.");
       }
+      // const id = uuidv4();
+      const createdAtTime = dayjs().unix();
+      await addDoc(newsletterRef, {
+        email,
+        createdAt: createdAtTime,
+        // id,
+      });
+    },
+    onSuccess: () => {
+      notify({
+        title: "Email added successfully",
+        type: "success",
+      });
+    },
+    onError: () => {
+      notify({
+        title: "Email already exists!",
+        type: "warning",
+      });
+      throw new Error("Email already exists");
     },
   });
 }

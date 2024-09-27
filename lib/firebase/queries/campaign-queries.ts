@@ -1,6 +1,9 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { fetchAllCampaigns, getCampaignData } from "../campaign";
-import { ContractStatesContext } from "@/context/contracts";
+import {
+  fetchAllCampaigns,
+  getCampaignData,
+} from "@/lib/firebase/queries/campaign";
+import { ContractStatesContext } from "@/lib/providers/Contracts";
 import {
   addDoc,
   collection,
@@ -14,8 +17,8 @@ import {
   orderBy,
   where,
 } from "firebase/firestore";
-import { db } from "@/firebase/config";
-import { CampaignDetails } from "@/interface/types/ido-types";
+import { db } from "@/lib/firebase/config";
+import { CampaignDetails } from "@/interface/ido-types";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
 
 export function useGetAddressCampaign(address: string) {
@@ -118,8 +121,8 @@ export function useSubmitCampaignToFirebase() {
 }
 
 export function useFetchAllCampaignFromContract() {
-  const { activeAccount, trinityFactoryContract } = ContractStatesContext();
-  const { ready, login, authenticated } = usePrivy();
+  const { trinityFactoryContract } = ContractStatesContext();
+  const { ready, authenticated } = usePrivy();
   return useQuery({
     queryKey: ["campaigns-from-contract"],
     queryFn: async () => {
@@ -132,7 +135,7 @@ export function useFetchAllCampaignFromContract() {
 
       const txn = await trinityFactoryContract?.campaignsLength();
 
-      let allCampaigns = [];
+      const allCampaigns = [];
       if (Number(txn?.toString())) {
         for (let i = 0; i < Number(txn?.toString()); i++) {
           const campaign = await trinityFactoryContract?.campaigns(i);

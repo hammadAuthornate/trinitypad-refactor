@@ -11,18 +11,9 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { db } from "@/firebase/config";
-import { AirdropQuestType } from "@/interface/types/airdrop-types";
-import {
-  User,
-  Wallet,
-  Twitter,
-  Discord,
-  Telegram,
-  Google,
-} from "@privy-io/react-auth";
-import { UserDetails } from "@/interface/types/profile-types";
-import { totalPoints } from "@/helpers/global-logic";
+import { db } from "@/lib//firebase/config";
+import { User } from "@privy-io/react-auth";
+import { UserDetails } from "@/interface/profile-types";
 
 function removeUndefinedProperties<T>(obj: T): Partial<T> {
   const result: Partial<T> = {};

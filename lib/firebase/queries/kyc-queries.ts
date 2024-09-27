@@ -5,7 +5,7 @@ import {
   updateDoc,
   deleteDoc
 } from "firebase/firestore"
-import { db } from "@/firebase/config"
+import { db } from "@/lib/firebase/config";
 
 export async function checkKnownUser(uid: string) {
   const querySnapshot = await getDoc(doc(db, "knownUsers", uid))

@@ -1,9 +1,7 @@
-import { BigNumberish, ethers } from "ethers";
+import { ethers } from "ethers";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../config";
-import { CampaignDetails } from "@/interface/types/ido-types";
-
-
+import { CampaignDetails } from "@/interface/ido-types";
 
 export async function addCampaignData(
   data: CampaignDetails,
@@ -19,7 +17,7 @@ export async function addCampaignData(
       walletAddress,
     };
 
-    const docRef = await addDoc(collection(db, "campaigns"), myData);
+    await addDoc(collection(db, "campaigns"), myData);
   } catch (e) {
     console.error("Error adding document: ", e);
   }

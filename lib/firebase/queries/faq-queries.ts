@@ -1,5 +1,5 @@
-import { db } from "@/firebase/config";
-import { FAQDetails } from "@/interface/types/faq-types";
+import { db } from "@/lib/firebase/config";
+import { FAQDetails } from "@/interface/faq-types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   addDoc,

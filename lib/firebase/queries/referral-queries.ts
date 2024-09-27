@@ -5,8 +5,8 @@ import {
 	where,
 	query,
 } from "firebase/firestore"
-import { db } from "@/firebase/config"
-import { Referral } from "@/interface/types/investment-types"
+import { db } from "@/lib/firebase/config";
+import { Referral } from "@/interface/investment-types";
 
 export function useGetWalletReferrals(wallet?: string) {
 	return useQuery({

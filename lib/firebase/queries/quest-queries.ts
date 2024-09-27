@@ -1,23 +1,15 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   addDoc,
-  arrayUnion,
   collection,
   deleteDoc,
   doc,
   getDocs,
-  increment,
   query,
-  updateDoc,
 } from "firebase/firestore";
-import { db } from "@/firebase/config";
-import { AirdropQuestType } from "@/interface/types/airdrop-types";
-import { CheckIfUserIsInDiscordServer } from "@/firebase/firestore/server-queries/discord";
-import { getUserProfileByPrivyId } from "./profile-queries";
-import {
-  GetCachedLeaderBoards,
-  GetLeaderBoards,
-} from "../server-queries/profile";
+import { db } from "@/lib/firebase/config";
+import { AirdropQuestType } from "@/interface/airdrop-types";
+import { GetCachedLeaderBoards } from "@/lib/firebase/server-queries/profile";
 
 export function useGetAirdropQuestItems() {
   return useQuery({

@@ -1,11 +1,11 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { collection, doc, getDoc, getDocs, setDoc, query, where } from "firebase/firestore"
-import { db } from "@/firebase/config"
-import { ContractStatesContext } from "@/context/contracts"
+import { db } from "@/lib/firebase/config";
+import { ContractStatesContext } from "@/lib/providers/Contracts";
 import {
   InvestmentDetails,
   PreInvestmentDetails,
-} from "@/interface/types/investment-types";
+} from "@/interface/investment-types";
 
 export function useGetWalletInvestments({ address }: { address?: string }) {
   return useQuery({
@@ -78,7 +78,7 @@ export function useSetWalletInvestment() {
 }
 
 export function useGetTotalLockedTNT() {
-  const { sepoliaStakeContractAddress, usdcContract } = ContractStatesContext()
+  const { usdcContract } = ContractStatesContext();
   return useQuery({
     queryKey: ["total-locked-TNT"],
     queryFn: async () => {

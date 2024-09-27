@@ -1,24 +1,15 @@
-import { db } from "@/firebase/config";
-import { FAQDetails } from "@/interface/types/faq-types";
+import { db } from "@/lib/firebase/config";
+// import { FAQDetails } from "@/interface/faq-types";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  query,
-  updateDoc,
-  where,
-} from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { useGetCampaignsFromContract } from "./campaign-queries";
-import { ContractStatesContext } from "@/context/contracts";
+import { ContractStatesContext } from "@/lib/providers/Contracts";
 import { ethers } from "ethers";
 import { trinityPad } from "@/abis/pad/trinity-pad";
 import { TrinityERC20 } from "@/abis/token/trinity-erc20";
 import { useNotify } from "@/components/ui/toast/notify";
 import dayjs from "dayjs";
-import { LaunchpadInvestmentFirebaseDetails } from "@/interface/types/investment-types";
+import { LaunchpadInvestmentFirebaseDetails } from "@/interface/investment-types";
 import { erc20Mock } from "@/abis/mocks/erc20-mock";
 
 export function useGetAmountRaisedInLaunchpad({
@@ -27,7 +18,7 @@ export function useGetAmountRaisedInLaunchpad({
   projectName?: string;
 }) {
   const { data } = useGetCampaignsFromContract();
-  const { mySigner, usdtContract } = ContractStatesContext();
+  const { mySigner } = ContractStatesContext();
   const selectedLaunchpad = data
     ?.filter((i) => i.projectName === projectName)
     ?.at(0);
@@ -68,7 +59,7 @@ export function useGetInvestmentsInLaunchpad({
   projectName?: string;
 }) {
   const { data } = useGetCampaignsFromContract();
-  const { mySigner, usdtContract, activeAccount } = ContractStatesContext();
+  const { mySigner, activeAccount } = ContractStatesContext();
   const selectedLaunchpad = data
     ?.filter((i) => i.projectName === projectName)
     ?.at(0);
@@ -104,11 +95,9 @@ export function useSubmitInvestmentInLaunchpad() {
   const { mySigner, activeAccount } = ContractStatesContext();
   return useMutation({
     mutationFn: async ({
-      projectCampaignId,
       projectName,
       amount,
     }: {
-      projectCampaignId?: string;
       projectName?: string;
       amount: string;
     }) => {
@@ -178,11 +167,9 @@ export function useSubmitPullInvestmentFromLaunchpad() {
   const { mySigner, activeAccount } = ContractStatesContext();
   return useMutation({
     mutationFn: async ({
-      projectCampaignId,
       projectName,
       amount,
     }: {
-      projectCampaignId?: string;
       projectName?: string;
       amount: string;
     }) => {
@@ -258,7 +245,7 @@ export function useGetCampaignStatusFromContract({
   projectName?: string;
 }) {
   const { data } = useGetCampaignsFromContract();
-  const { mySigner, activeAccount } = ContractStatesContext();
+  const { mySigner } = ContractStatesContext();
   return useQuery({
     queryKey: ["campaign-status-from-contract-for-", projectName],
     queryFn: async () => {
@@ -335,7 +322,7 @@ export function useSubmitCancelLaunchpad() {
 export function useSubmitClaimRefundFromLaunchpad() {
   const notify = useNotify();
   const { data } = useGetCampaignsFromContract();
-  const { mySigner, activeAccount } = ContractStatesContext();
+  const { mySigner } = ContractStatesContext();
   return useMutation({
     mutationFn: async ({ projectName }: { projectName?: string }) => {
       const selectedLaunchpad = data

@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getDownloadURL, ref } from "firebase/storage";
-import { storage } from "../config";
+import { storage } from "@/lib/firebase/config";
 
 export function useGetFirebaseFileById({ imageId }: { imageId?: string }) {
   return useQuery({

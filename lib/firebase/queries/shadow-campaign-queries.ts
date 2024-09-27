@@ -1,5 +1,5 @@
-import { db } from "@/firebase/config";
-import { CampaignDetails } from "@/interface/types/ido-types";
+import { db } from "@/lib/firebase/config";
+import { CampaignDetails } from "@/interface/ido-types";
 import { useQuery } from "@tanstack/react-query";
 import { collection, getDocs, query } from "firebase/firestore";
 
