@@ -1,22 +1,11 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PrivyProviderWrapper from "@/lib/providers/PrivyProvider";
-import { Toaster } from "@/components/ui/sonner";
 import QueryProvider from "@/lib/providers/QueryProvider";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import { Toaster } from "@/components/ui/toaster";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -30,17 +19,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-background antialiased`}
-      >
+      <head>
+        <link
+          rel="shortcut icon"
+          href="/assets/favicon.svg"
+          type="image/x-icon"
+        />
+        <meta
+          name="google-site-verification"
+          content="yBpTSxcXRR6837rTsEHRbs9gEzxjr3ZiaHFmIM4Mkqc"
+        />
+      </head>
+      <GoogleTagManager gtmId="G-M081SD7ZD3" />
+      <body className="bg-background antialiased">
         <PrivyProviderWrapper>
           <QueryProvider>
             <Navbar />
             {children}
             <Footer />
-            <Toaster />
           </QueryProvider>
         </PrivyProviderWrapper>
+        <Toaster />
       </body>
     </html>
   );

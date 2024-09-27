@@ -10,7 +10,7 @@ import { TrinityERC20 } from "@/abis/token/trinity-erc20";
 import { useNotify } from "@/components/ui/toast/notify";
 import dayjs from "dayjs";
 import { LaunchpadInvestmentFirebaseDetails } from "@/interface/investment-types";
-import { erc20Mock } from "@/abis/mocks/erc20-mock";
+// import { erc20Mock } from "@/abis/mocks/erc20-mock";
 
 export function useGetAmountRaisedInLaunchpad({
   projectName,

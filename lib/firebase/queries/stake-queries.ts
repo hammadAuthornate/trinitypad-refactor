@@ -66,11 +66,11 @@ export function useDeleteStake() {
 export function useSubmitUnstakeByIndex() {
   const { user } = usePrivy();
   const { sepoliaStakingContract } = ContractStatesContext();
-  const deleteStakeMutation = useDeleteStake();
+  // const deleteStakeMutation = useDeleteStake();
   const userStakesData = useGetStakesForAddress({
     address: user?.wallet?.address,
   });
-  const { data } = useGetStakesForAddressFromContract();
+  // const { data } = useGetStakesForAddressFromContract();
   const toast = useNotify();
   return useMutation({
     mutationKey: ["submit-unstake"],
@@ -97,7 +97,7 @@ export function useSubmitUnstakeByIndex() {
         sortPairs: true,
       });
 
-      const rootHash = merkleTree.getRoot();
+      // const rootHash = merkleTree.getRoot();
 
       const unstakeIndex = totalStakes?.at(index);
 
@@ -121,7 +121,7 @@ export function useSubmitUnstakeByIndex() {
         proof,
       );
 
-      deleteStakeMutation?.mutate({ id: unstakeIndex?.id! });
+      // deleteStakeMutation?.mutate({ id: unstakeIndex?.id! });
 
       return result;
     },
@@ -149,7 +149,7 @@ export function useGetStakesForAddressFromContract() {
       const userStakesLength =
         await sepoliaStakingContract?.userStakesLength(address);
 
-      let totalStakes = [];
+      const totalStakes = [];
       for (let index = 0; index < Number(userStakesLength); index++) {
         const result = await sepoliaStakingContract?.walletStakes(
           address,
@@ -173,13 +173,8 @@ export function useGetStakesForAddressFromContract() {
 
 export function useSubmitStakeRequest() {
   const notify = useNotify();
-  const {
-    mySigner,
-    chainId,
-    usdtContract,
-    sepoliaStakingContract,
-    sepoliaStakeContractAddress,
-  } = ContractStatesContext();
+  const { usdtContract, sepoliaStakingContract, sepoliaStakeContractAddress } =
+    ContractStatesContext();
   const { user } = usePrivy();
   return useMutation({
     mutationKey: ["submit-stake-request"],

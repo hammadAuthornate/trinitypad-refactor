@@ -17,6 +17,9 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import { LoginButton } from "./PrivyButtons";
+import { useNotify } from "./ui/toast/notify";
+import { useLogin } from "@privy-io/react-auth";
+import { createNewUser } from "@/lib/firebase/queries/profile-queries";
 
 const navbarLinks = [
   {
@@ -55,10 +58,23 @@ const navbarLinks = [
 ];
 
 export default function Navbar() {
+  const notify = useNotify();
   const pathname = usePathname();
 
   const [isOpen, setIsOpen] = useState(false);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
+
+  useLogin({
+    onComplete: async (user, isNewUser) => {
+      notify({ type: "success", title: "Successfully Logged in." });
+      if (isNewUser) {
+        await createNewUser(user);
+      }
+    },
+    onError: () => {
+      notify({ type: "error", title: "An Error Occurred during Login" });
+    },
+  });
 
   const toggleDrawer = () => setIsOpen(!isOpen);
 
