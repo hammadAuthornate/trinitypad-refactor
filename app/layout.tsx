@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PrivyProviderWrapper from "@/lib/providers/PrivyProvider";
 import { Toaster } from "@/components/ui/sonner";
+import QueryProvider from "@/lib/providers/QueryProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,10 +34,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} bg-background antialiased`}
       >
         <PrivyProviderWrapper>
-          <Navbar />
-          {children}
-          <Footer />
-          <Toaster />
+          <QueryProvider>
+            <Navbar />
+            {children}
+            <Footer />
+            <Toaster />
+          </QueryProvider>
         </PrivyProviderWrapper>
       </body>
     </html>
